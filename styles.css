@@ -1,0 +1,222 @@
+
+    
+    
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.nav_container
+{
+    color: white;
+    text-align: center;
+    padding: 0px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.brand_logo
+{
+    float: left;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+
+    
+}
+
+.burger{
+    float: right;
+    display:inline-block;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.hamburger_menu{
+    width: 35px;
+    height: 5px;
+    background-color: white;
+    margin: 6px 0;
+     
+}
+
+.navbar {
+    background-color: #7868e6;
+    overflow: auto;
+    width: 100%;
+}
+
+.navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+     
+}
+.navbar li{
+    float: left;
+    display: inline-block; 
+    padding:5px;
+    margin: 6px 10px;
+}
+a:link {
+    text-decoration: none;
+    color: #e4fbff;
+    }
+      
+a:visited {
+        text-decoration: none;
+        color: #e4fbff;
+      }
+      
+a:hover {
+        text-decoration: underline;
+        color: #e4fbff;
+      }
+      
+a:active {
+        text-decoration: underline;
+        color: #e4fbff;
+      }
+
+
+.container{
+    background-color: #b8b5ff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+    display: block;
+    padding: 5em;    
+}
+
+input{
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+button{
+    font-size: 17px;
+    padding: 10px;
+    margin: 20px;
+    border-style: dashed;
+    border-width: 1px;
+    border-color: grey;
+    border-radius: 5px;
+    display: inline-block; 
+    
+
+}
+
+.button-primary{
+    background-color: black;
+    color: #e4fbff;
+    
+}
+
+.button-secondary{
+    background-color: black;
+    font-size: 17px;
+    padding: 10px;
+    margin: 20px;
+    text-decoration: none;
+    border-style: dashed;
+    border-width: 1px;
+    border-color: grey;
+    border-radius: 5px;
+     
+}
+
+footer{
+    
+    padding: 5px;
+    color: slategrey;
+    float: right;
+}
+
+.flash_header_success{
+    position:absolute;
+    padding: 10px 100px;
+    top:20%;
+    left:40%;
+    margin-top:-50px; /* this is half the height of your div*/  
+    margin-left:-100px;
+    background-color: #e4fbff;
+    text-align: center;
+    color: black;
+}
+.error_div{
+    padding: 0;
+}
+
+.hero_buttons{
+    text-align: center
+}
+.round_button {
+    height: 7em;
+    line-height: 7em;  
+    width: 7em;  
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 50%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+    margin: 2em;
+  }
+
+  .button_text
+{
+    
+    text-decoration: none;
+}
+
+
+#drop_zone {
+    border: 5px dashed #ccc;
+    border-radius: 20px;
+    width: 480px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: #e4fbff;
+  }
+  #drop_zone.highlight {
+    border-color: black;
+  }
+  p {
+    margin-top: 0;
+  }
+  .drop_form {
+    margin-bottom: 10px;
+  }
+  
+  #gallery {
+    margin-top: 10px;
+  }
+  #gallery img {
+    width: 150px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  .upload_button {
+    display: inline-block;
+    padding: 20px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    left: 50%;
+    
+  }
+  .upload_button:hover {
+    background: #ddd;
+  }
+  #fileElem {
+    visibility: hidden;
+    
+  }

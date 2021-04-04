@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Hash
+{% endblock %}
+
+{% block main %}
+  <script src="/static/hash.js"></script>  
+  <h2 class="sub_header" >#hash a file#</h2>
+
+    <!-- https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/ -->
+
+    <div id="drop_zone">
+        <form class="drop_form">
+          <p>Drop or upload image for hashing</p>
+          <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+          
+          <label class="upload_button" for="fileElem">Select image</label>
+        </form>
+      </div>
+
+
+{% endblock %}

@@ -1,0 +1,37 @@
+
+{% extends "layout.html" %}
+
+{% block title %}
+    create account
+{% endblock %}
+
+{% block main %}
+<script src="/static/register.js"></script>
+
+<h2>
+    create your account:
+</h2>
+
+<form id="register_form" action="/register" method="post">
+    <div class="form-group">
+        <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
+    </div>
+    <div class="form-group">
+        <input autocomplete="off" class="form-control" name="email" placeholder="Email" type="email">
+    </div>
+    <div class="form-group">
+        <input class="form-control" name="password" placeholder="Password" type="password">
+    </div>
+
+    <div class="form-group">
+        <input class="form-control" name="confirmation" placeholder="Confirm pwrd" type="password">
+    </div>
+    <input id="register_terms" type="checkbox" name="terms" value="yes">
+    <label for="register_terms"> I agree to the <a href="#"> terms and conditions</a> </label><br>
+    <button class="button-primary" type="submit">create</button>
+    
+</form>
+
+
+<script src="/static/register.js"></script>    
+{% endblock %}

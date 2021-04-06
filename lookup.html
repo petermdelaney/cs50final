@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Lookup
+{% endblock %}
+
+{% block main %}
+
+    <h1> Lookup a hash </h1>
+    <form action="/lookup" id="lookup_form" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" id="lookup_name" name="hash" placeholder="Enter hash" type="text">
+        </div>
+
+        <button class="button-primary" type="submit">lookup</button>
+
+        <div class="error_div">
+            <h5 id="error"> </h5>
+        </div>
+    </form>
+    <script src="/static/lookup.js"></script>    
+{% endblock %}

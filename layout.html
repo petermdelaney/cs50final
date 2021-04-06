@@ -33,12 +33,12 @@
 
                 {% if session.user_id %}
                     <ul class="nav_primary">
-                        <li class="nav_item"><a class="navlink" href="#">Lookup</a></li>
-                        <li class="nav_item"><a class="navlink" href="#">Hash</a></li>
-                        <li class="nav_item"><a class="navlink" href="#">myaccount</a></li>
+                        <li class="nav_item"><a class="navlink" href="/lookup">Lookup</a></li>
+                        <li class="nav_item"><a class="navlink" href="/hash">Hash</a></li>
+                        
                     </ul>
                     <ul class="nav_secondary">
-                        <li class="nav_item"><a class="navlink" href="#">Log Out</a></li>
+                        <li class="nav_item"><a class="navlink" href="/logout">Log Out</a></li>
                     </ul>
                 {% else %}
                     <ul class="nav_primary">

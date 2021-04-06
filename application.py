@@ -4,6 +4,8 @@ import sqlite3
 
 import hashlib
 
+from datetime import datetime
+
 from flask import Flask, flash, redirect, render_template, request, session, jsonify, g, url_for
 from flask_session import Session
 from tempfile import mkdtemp
@@ -59,13 +61,54 @@ def index():
 
     return render_template("index.html")
 
+@app.route("/lookup", methods=["GET", "POST"])
+@login_required
+def lookup():
+
+    # User reached route via POST
+    if request.method == "POST":
+
+        # Ensure username was submitted
+        if not request.form.get("hash"):
+            return apology("must provide hash", 403)
+
+        def dict_factory(cursor, row):
+            d = {}
+            for idx, col in enumerate(cursor.description):
+                d[col[0]] = row[idx]
+            return d
+        
+        #connect to database
+        con = sqlite3.connect('test.db')
+        con.row_factory = dict_factory
+        cur = con.cursor()
+
+        # Query database for username
+        cur.execute("SELECT * FROM transactions WHERE file_hash = ?", [request.form.get("hash")])
+        rows = cur.fetchall()
+
+        con.commit()
+        con.close()
+
+        # Ensure username exists and password is correct
+        
+        
+        if len(rows) != 1 :
+        
+            return apology("hash not found", 403)
+        
+        else:
+            flash("hashfound!")
+            return render_template("lookup.html")
+    else:
+        return render_template("lookup.html")
 
 @app.route("/hash", methods=["GET", "POST"])
 @login_required
 def hash():
 
     #confirm current user from session data
-    #cur_id = session["user_id"]
+    cur_id = session["user_id"]
 
     if request.method == "POST":
     
@@ -88,13 +131,28 @@ def hash():
             digest = md5_hash.hexdigest()
             print(digest)
             
-            #save copy
+           #add hash to database
+            def dict_factory(cursor, row):
+                d = {}
+                for idx, col in enumerate(cursor.description):
+                    d[col[0]] = row[idx]
+                return d
+            
+            #connect to database
+            con = sqlite3.connect('test.db')
+            con.row_factory = dict_factory
+            cur = con.cursor()
+            
+            date_time = datetime.now()
+            # add hash into transactions table
+            cur.execute("INSERT INTO transactions (file_hash, date_time, user_id) VALUES (?, ?, ?)", [digest, date_time, cur_id])
+            
+            con.commit()
+            con.close()
 
-            ## does this reload page??? 
+            ##  code to save file (not needed) 
             #file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-               
-            ## confirm why this does't work
-
+            
             return jsonify(digest)
         
     else:

@@ -2,13 +2,21 @@ import os
 
 import sqlite3
 
-from flask import Flask, flash, redirect, render_template, request, session, jsonify, g
+import hashlib
+
+from flask import Flask, flash, redirect, render_template, request, session, jsonify, g, url_for
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.utils import secure_filename
+
 
 from helpers import apology, login_required
+
+UPLOAD_FOLDER = '/home/petermdelaney/cs50/project/uploads'
+ALLOWED_EXTENSIONS = {'png', 'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+
 
 # Configure application
 app = Flask(__name__)
@@ -29,10 +37,21 @@ def after_request(response):
 app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
+
+#upload folder
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
+
 Session(app)
 
 # configure basic database
 DATABASE = 'test.db'
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route("/")
 @login_required
@@ -41,21 +60,52 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/hash")
+@app.route("/hash", methods=["GET", "POST"])
 @login_required
 def hash():
 
     #confirm current user from session data
-    cur_id = session["user_id"]
+    #cur_id = session["user_id"]
 
-    return render_template("hash.html")
+    if request.method == "POST":
+    
+        if not request.files['file']:
+            return apology('No file part')
+            
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == '':
+            return apology('No selected file')
+        
+        if file and allowed_file(file.filename):
+            #filename = secure_filename(file.filename)
+
+            #hash file
+            md5_hash = hashlib.md5()
+            content = file.read()
+            md5_hash.update(content)
+            digest = md5_hash.hexdigest()
+            print(digest)
+            
+            #save copy
+
+            ## does this reload page??? 
+            #file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+               
+            ## confirm why this does't work
+
+            return jsonify(digest)
+        
+    else:
+        return render_template("hash.html") 
 
     # User reached route via POST (as by submitting a form via POST)
     #if request.method == "POST":
 
 
 
-    #else render_template("hash.html")
+ 
     #basic schema for page
     # 1. drag and drop javascript box
     # 2. circle stating how many file hashes completed
